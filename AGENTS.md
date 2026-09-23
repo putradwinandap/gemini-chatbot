@@ -24,6 +24,10 @@ Alur utama: UI mengirim `{ messages, systemInstructionId }` ke `/api/chat`; rout
 
 Terapkan SOLID secara pragmatis, terutama dependency inversion pada adapter API dan single responsibility pada route, state, serta UI. Ikuti KISS untuk MVP, YAGNI untuk fitur yang belum dibutuhkan, DRY tanpa mengorbankan keterbacaan, dan fail-fast pada konfigurasi invalid. Hindari global mutable state, duplikasi kontrak API, prop drilling berlebihan, serta abstraksi sebelum ada kebutuhan nyata. Validasi semua input server-side dan tangani loading, timeout, rate limit, empty response, serta error dengan pesan yang aman bagi pengguna.
 
+## Rendering Pesan
+
+Pesan assistant dirender sebagai Markdown menggunakan `react-markdown` dan `remark-gfm` agar heading, penekanan, daftar, tabel, tautan, dan blok kode ditampilkan sebagai konten terformat. Raw HTML dari jawaban tidak diaktifkan. Pesan user tetap ditampilkan sebagai teks biasa supaya input yang diketik tidak berubah makna. Ini adalah keputusan presentasi client-side; kontrak API dan format history local storage tetap menyimpan teks sumber Markdown, sehingga tidak memerlukan migrasi data.
+
 ## Architecture Change Contract
 
 `AGENTS.md` adalah sumber aturan governance proyek. Setiap perubahan arsitektur, kontrak API, struktur folder, teknologi, strategi state, persistence, atau aturan coding wajib memperbarui dokumen ini pada perubahan yang sama. Catat alasan, dampak, trade-off, dan langkah migrasi bila relevan. Jangan menambahkan pola yang bertentangan dengan panduan; hapus atau revisi aturan lama jika keputusan baru menggantikannya. Perubahan dianggap belum selesai sebelum dokumentasi dan implementasi kembali sinkron.
